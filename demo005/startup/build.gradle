@@ -1,0 +1,43 @@
+buildscript {
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:'+versions.SpringBoot,
+                'io.spring.gradle:dependency-management-plugin:'+versions.SpringDependencies
+    }
+}
+
+plugins {
+   id 'java'
+}
+group 'org.kendar'
+version '1.0.0-SNAPSHOT'
+
+apply plugin:'org.springframework.boot'
+apply plugin:'io.spring.dependency-management'
+
+/*application {
+    mainClassName = 'org.kendar.HelloWorld'
+}*/
+
+
+
+dependencies {
+	implementation project(":services")
+	
+    implementation group: 'org.springframework.boot', name: 'spring-boot-dependencies', version: versions.SpringBoot
+    
+    implementation 'org.springframework.boot:spring-boot-starter-web:'+versions.SpringBoot
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:'+versions.SpringBoot
+
+    components {
+        withModule('org.springframework:spring-beans') {
+            allVariants {
+                withDependencyConstraints {
+                    it.findAll { it.name == 'snakeyaml' }
+                    	.each { it.version { strictly '1.19' } }
+                }
+            }
+        }
+    }
+}
+

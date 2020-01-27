@@ -1,0 +1,29 @@
+plugins {
+   id 'java'
+   id 'java-library'
+   id 'maven-publish'
+}
+group 'org.kendar'
+version '1.0.0-SNAPSHOT'
+
+ext.repos = [
+        'LocalMaven'   : "file://${projectDir}/../maven"
+]
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from project.components.java
+        }
+    }
+    repositories {
+        maven {
+            name = 'LocalMaven'
+            url = uri(repos.LocalMaven)
+        }
+    }
+}
+
+task publishDir(dependsOn:'publish'){
+
+}

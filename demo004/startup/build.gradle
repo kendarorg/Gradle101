@@ -1,0 +1,16 @@
+plugins {
+   id 'java'
+   id 'application'
+}
+group 'org.kendar'
+version '1.0.0-SNAPSHOT'
+
+application {
+    mainClassName = 'org.kendar.HelloWorld'
+}
+
+dependencies {
+    implementation project(":services")
+}
+
+
