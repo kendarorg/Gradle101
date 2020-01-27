@@ -1,4 +1,4 @@
-﻿[comment]: <> (Export with https://dillinger.io/)
+[comment]: <> (Export with https://dillinger.io/)
 
 # My Gradle Way
 
@@ -698,5 +698,8 @@ Then running "gradle clean check jacocoTestReport" You will generate the report 
 ## Profiles
 [comment]: <> (https://docs.gradle.org/current/userguide/migrating_from_maven.html)
 
+TODO
+
 ## Including NodeJs builds
 
+TODO
