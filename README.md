@@ -696,10 +696,103 @@ Then running "gradle clean check jacocoTestReport" You will generate the report 
 ![gradle init](createsimpleapplication.jacoco.png)
 
 ## Profiles
-[comment]: <> (https://docs.gradle.org/current/userguide/migrating_from_maven.html)
 
-TODO
+Clone the project demo002 into demo007
+
+Profiles in gradle can be simulated in various way
+
+First we should have a way to define a default profile. Here an environment variable is used. Simply add it to the main build.gradle
+
+	if (!hasProperty('buildProfile')) ext.buildProfile = 'default'
+	
+### Properties for the build script
+
+Now a new directory demo007/profiles is created containing two files
+
+ * default.properties
+ 
+	deploymentServer=localhost
+	
+ * prod.properties
+ 
+ 	deploymentServer=production.com
+
+We can read the content of these into gradle's ext variable. Hem.. had you noticed some plain Java?? 
+
+	Properties props = new Properties()
+	props.load(new FileInputStream(project.rootDir.path+'/profiles/'+ext.buildProfile+'.properties'))
+	props.each{prop->
+		project.ext.set(prop.key,prop.value)
+	}
+
+And of course use it inside all our scripts
+
+	println 'Deployment Target: ' + ext.deploymentServer
+	
+### Java properties files
+
+It is also possible to use specific property files to include in the various projects. To give an example you can create the directories demo007/profiles/default and demo007/profiles/prod containing the environment specific properties for the project
+
+ * default\environment.properties
+ 
+	maxThreads=1
+ 
+ * prod\environment.properties
+ 
+	maxThreads=10000
+ 
+At first is needed a variable containing the demo007 path, this must be set inside the main build.gradle and used by all the subprojects
+
+	ext.rootDir='file://${projectDir}'
+	
+Then inside the subprojects we can add the specific files. For example in startup/build.gradle. Note that we are using the "ext" variables defined inside the root project!
+
+	sourceSets {
+		main {
+			java{
+				resources {
+					srcDir 'file://'+rootDir+'/profiles/'+buildProfile
+					include 'environment.properties'
+					output.resourcesDir='${buildDir}/resources/main'
+				}
+			}
+		}
+	}
+
+Then changing the main class to the following, it would be possible to print the content of the resource!
+
+	package org.kendar;
+	
+	import java.io.IOException;
+	import java.util.Properties;
+	
+	public class HelloWorld {
+	    public static void main(String[] args) {
+	    	HelloWorldService service = new HelloWorldService();
+	    	service.printHello();
+	    	
+	    	Properties props = new Properties();
+		    try 
+		    {
+		        props.load(HelloWorld.class.getClassLoader().getResourceAsStream("environment.properties"));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		    System.out.println("I use maxThreads: " + props.getProperty("maxThreads"));
+	    }
+	}
+
+Running "gradle run" will result in the following
+
+![gradle init](createsimpleapplication.rundefault.png)
+
+While adding a parameter
+
+	gradle run -PbuildProfile=prod
+
+![gradle init](createsimpleapplication.runprod.png)
+
+Notice the "maxThreads" and Deplyoment target values!!
 
 ## Including NodeJs builds
 
-TODO

@@ -1,0 +1,26 @@
+plugins {
+   id 'java'
+   id 'application'
+}
+group 'org.kendar'
+version '1.0.0-SNAPSHOT'
+
+application {
+    mainClassName = 'org.kendar.HelloWorld'
+}
+
+dependencies {
+    implementation project(":services")
+}
+
+sourceSets {
+	main {
+		java{
+			resources {
+				srcDir 'file://'+rootDir+'/profiles/'+buildProfile
+				include 'environment.properties'
+				output.resourcesDir='${buildDir}/resources/main'
+			}
+		}
+	}
+}
