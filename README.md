@@ -1,14 +1,15 @@
 Gradle tutorial sources 
 
-The tutorial is [here](http://kendar.org/?p=/java/gradle)
- * [Setup](http://kendar.org/?p=/java/gradle#setup)
- * [Create a simple application](http://kendar.org/?p=/java/gradle#setup#p000)
- * [Create an application with root project](http://kendar.org/?p=/java/gradle#setup#p001)
- * [Adding internal dependencies](http://kendar.org/?p=/java/gradle#setup#p002)
- * [Publishing on maven repository](http://kendar.org/?p=/java/gradle#setup#p003)
- * [Using "external" projects](http://kendar.org/?p=/java/gradle#setup#p004)
- * [Using Spring boot](http://kendar.org/?p=/java/gradle#setup#p005)
- * [Adding Junit and JaCoCo](http://kendar.org/?p=/java/gradle#setup#p006)
- * [Profiles](http://kendar.org/?p=/java/gradle#setup#p007)
+<ul>
+<li class="markdown"><a href="?p=/java/gradle/index">Setup</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_0simple">Create a simple application</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_1rootproject">Create an application with root project</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_2internaldeps">Adding internal dependencies</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_3mavenpublish">Publishing on maven repository</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_4externaldeps">Using "external" projects</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_5springboot">Using Spring boot</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_6jacoco">Adding Junit and JaCoCo</a></li>
+<li class="markdown"><a href="?p=/java/gradle/gradle_7profiles">Profiles</a></li>
+</ul>
 
 
